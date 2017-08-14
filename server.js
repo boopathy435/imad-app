@@ -47,6 +47,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/:mem', function (req, res) {
+    var mem=req.params.mem;
   res.send(createtemplate(fm[mem]));
 });
 
