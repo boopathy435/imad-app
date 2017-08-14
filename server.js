@@ -5,12 +5,44 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+var kanagu = {
+    title: 'Kanagaraj',
+    content: `<p>Hi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am Kanagu
+            Hi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am Kanagu.</p>`
+              };
+  function createtemplate(data){ 
+      var title=data.title;
+      var content=data.content;
+ var htmltemplate=`<!doctype html>
+<html>
+    <head>
+        <title>${title}</title>
+        <link href="/ui/style.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div>
+            <a href="/">Home</a>
+            </div>
+       <div class="center">
+            <img src="/ui/madi.png" class="img-medium"/>
+        </div>
+        <br>
+        <div class="center text-big bold">
+           ${content}
+        </div>
+        <script type="text/javascript" src="/ui/main.js">
+        </script>
+    </body>
+</html>
+`; 
+return htmltemplate;
+}
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
 app.get('/kanagu', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'kanagu.html'));
+  res.send(createtemplate(kanagu));
 });
 
 app.get('/krishnakan', function (req, res) {
