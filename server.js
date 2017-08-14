@@ -10,7 +10,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/kanagu', function (req, res) {
-  res.send('Hey Kanagu will be joined soon');
+  res.sendFile(path.join(__dirname, 'ui', 'kanagu.html'));
 });
 
 app.get('/ui/style.css', function (req, res) {
