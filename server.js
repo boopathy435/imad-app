@@ -4,12 +4,17 @@ var path = require('path');
 
 var app = express();
 app.use(morgan('combined'));
-
-var kanagu = {
-    title: 'Kanagaraj',
+var fm = {
+    'kanagu': {
+      title: 'Kanagaraj',
     content: `<p>Hi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am Kanagu
             Hi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am Kanagu.</p>`
-              };
+              },
+     'krishnakan': {
+     title: 'Kannammal Krishnasamy',
+    content: `<p>Hi! I am Kannammal Krishnasamy</p>`
+}             
+};
   function createtemplate(data){ 
       var title=data.title;
       var content=data.content;
@@ -41,13 +46,11 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/kanagu', function (req, res) {
-  res.send(createtemplate(kanagu));
+app.get('/:mem', function (req, res) {
+  res.send(createtemplate(fm[mem]));
 });
 
-app.get('/krishnakan', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'krishnakan.html'));
-});
+
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
