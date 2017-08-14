@@ -51,6 +51,9 @@ app.get('/:mem', function (req, res) {
   res.send(createtemplate(fm[mem]));
 });
 
+app.get('/ui/main.js', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'main.js'));
+});
 
 
 app.get('/ui/style.css', function (req, res) {
