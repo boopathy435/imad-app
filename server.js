@@ -17,12 +17,12 @@ app.use(morgan('combined'));
 
 
 var fm = {
-    'kanagu': {
+    '2': {
       title: 'Kanagaraj',
     content: `<p>Hi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am Kanagu
             Hi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am KanaguHi! I am Kanagu.</p>`
               },
-     'krishnakan': {
+     '1': {
      title: 'Kannammal Krishnasamy',
     content: `<p>Hi! I am Kannammal Krishnasamy</p>`
 }             
@@ -64,7 +64,6 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-var pool = new Pool(config);
 //app.get('/testdb',function(req,res) {
  //   pool.query('SELECT * FROM test',function(err,result) {
 //        if(err){
@@ -75,6 +74,8 @@ var pool = new Pool(config);
 //    });
 //});
 
+
+var pool = new Pool(config);
 app.get('/article/:mem', function (req, res) {
 pool.query("SELECT * FROM test WHERE title = "+req.params.mem, function(err, result) {
     if(err){
@@ -84,12 +85,13 @@ pool.query("SELECT * FROM test WHERE title = "+req.params.mem, function(err, res
             res.status(404).send('Article not found');
         }else{
             var mem=result.rows[0];
-            res.send(createtemplate(fm[mem]));
+            res.send(createtemplate(mem));
         }
     }
 });
   
 });
+
 
 app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
