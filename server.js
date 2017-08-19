@@ -76,7 +76,7 @@ app.get('/', function (req, res) {
 
 
 var pool = new Pool(config);
-app.get('/article/:mem', function (req, res) {
+app.get('/:mem', function (req, res) {
 pool.query("SELECT * FROM test WHERE title = "+req.params.mem, function(err, result) {
     if(err){
         res.status(500).send(err.toString());
