@@ -76,7 +76,7 @@ var pool = new Pool(config);
 //});
 
 app.get('/article/:mem', function (req, res) {
-pool.query("SELECT * FROM test WHERE id = "+req.params.mem, function(err, result) {
+pool.query("SELECT * FROM test WHERE id = '"+req.params.mem+"'", function(err, result) {
     if(err){
         res.status(500).send(err.toString());
     }else{
