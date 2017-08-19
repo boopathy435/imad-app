@@ -46,6 +46,8 @@ function createtemplate(data){
         </div>
         <br>
         <div class="center text-big bold">
+        ${date}
+        <hr>
            ${content}
         </div>
         <script type="text/javascript" src="/ui/main.js">
@@ -63,19 +65,30 @@ app.get('/', function (req, res) {
 });
 
 var pool = new Pool(config);
-app.get('/testdb',function(req,res) {
-    pool.query('SELECT * FROM test',function(err,result) {
-        if(err){
-            res.status(500).send(err.toString());
-        }else{
-            res.send(JSON.stringify(result.rows));
-        }
-    });
-});
+//app.get('/testdb',function(req,res) {
+ //   pool.query('SELECT * FROM test',function(err,result) {
+//        if(err){
+//            res.status(500).send(err.toString());
+//        }else{
+ //           res.send(JSON.stringify(result.rows));
+//        }
+//    });
+//});
 
-app.get('/:mem', function (req, res) {
-    var mem=req.params.mem;
-  res.send(createtemplate(fm[mem]));
+app.get('/article/:mem', function (req, res) {
+pool.query("SELECT * FROM test WHERE id = "+req.params.mem, function(err, result) {
+    if(err){
+        res.status(500).send(err.toString());
+    }else{
+        if(result.rows.length ===0){
+            res.status(404).send('Article not found');
+        }else{
+            var mem=result.rows[0];
+            res.send(createtemplate(fm[mem]));
+        }
+    }
+});
+  
 });
 
 app.get('/ui/main.js', function (req, res) {
