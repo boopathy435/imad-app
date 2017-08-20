@@ -92,7 +92,10 @@ pool.query("SELECT * FROM test WHERE title = "+req.params.mem, function(err, res
   
 });
 
-
+app.get('/hash/:input',function(req,res){
+    var io=req.params.input;
+    res.send(io);
+});
 app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
